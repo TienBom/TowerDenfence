@@ -1,0 +1,18 @@
+package GameEntity.Tower;
+
+public interface TowerProperty {
+    int NORMAL_TOWER_RANGE = 80;
+    int NORMAL_TOWER_ATTACKRATE = 10;
+    int NORMAL_TOWER_WIDTH = 30;
+    int NORMAL_TOWER_HEIGHT = 30;
+
+    int SMALLER_TOWER_RANGE = 70;
+    int SMALLER_TOWER_ATTACKRATE = 150;
+    int SMALLER_TOWER_WIDTH = 40;
+    int SMALLER_TOWER_HEIGHT = 40;
+
+    int SNIPER_TOWER_RANGE = 70;
+    int SNIPER_TOWER_ATTACKRATE = 150;
+    int SNIPER_TOWER_WIDTH = 50;
+    int SNIPER_TOWER_HEIGHT = 50;
+}
