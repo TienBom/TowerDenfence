@@ -8,6 +8,7 @@ import GameEntity.Enemy.EnemyManger;
 import GameEntity.GameObject;
 import Main.Player;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Tower extends GameObject {
     protected int range;
@@ -57,7 +58,8 @@ public class Tower extends GameObject {
 
     @Override
     public void render(GraphicsContext gc) {
-        gc.fillRect(x + 20, y + 20, 10, 10);
+        gc.setFill(Color.BLACK);
+        gc.fillRect(x + 20, y + 20, 30, 30);
     }
 
     @Override

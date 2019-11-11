@@ -9,5 +9,6 @@ public class Points {
             new Position(5 * 80 + 40, 0 * 80 + 40),
             new Position(5 * 80 + 40, 5 * 80 - 40),
             new Position(9 * 80 + 40, 5 * 80 - 40),
+            new Position(10 * 80 + 00, 5 * 80 - 40)
     };
 }

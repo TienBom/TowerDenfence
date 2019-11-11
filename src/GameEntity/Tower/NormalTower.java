@@ -6,7 +6,7 @@ public class NormalTower extends Tower implements TowerProperty{
     }
     public NormalTower(){
         super(NORMAL_TOWER_RANGE,NORMAL_TOWER_ATTACKRATE);
-        this.x = 4 * 80;
-        this.y = 2 * 80;
+        this.x = 1 * 80;
+        this.y = 6 * 80;
     }
 }

@@ -4,6 +4,7 @@ import GameEntity.Enemy.Enemy;
 import GameEntity.GameObject;
 import GameEntity.Tower.Tower;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Bullet extends GameObject {
     protected double speed;
@@ -46,10 +47,11 @@ public class Bullet extends GameObject {
 
     @Override
     public void render(GraphicsContext gc) {
-            gc.fillRect(x,y,10,10);
+            gc.setFill(Color.WHITE);
+            gc.fillRect(x,y,20,20);
     }
     public boolean isHit(){
-        return (Math.sqrt(Math.pow(this.x-target.y,2)+Math.pow(this.y-target.y,2)) <= target.x*target.i);
+        return (Math.sqrt(Math.pow(this.x-target.y,2)+Math.pow(this.y-target.y,2)) <= target.x*10);
     }
     @Override
     public void update() {

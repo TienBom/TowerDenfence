@@ -19,30 +19,27 @@ public class EnemyManger {
         player = _player;
         graphicsContext = _graphicsContext;
         listEnemy = new ArrayList<>();
-        EnemyManger.addEnemy(new NormalEnemy(player));
-        EnemyManger.addEnemy(new NormalEnemy(player));
-        EnemyManger.addEnemy(new NormalEnemy(player));
-        EnemyManger.addEnemy(new TankerEnemy(player));
-        EnemyManger.addEnemy(new TankerEnemy(player));
-        EnemyManger.addEnemy(new SmallerEnemy(player));
-        EnemyManger.addEnemy(new SmallerEnemy(player));
-        EnemyManger.addEnemy(new BossEnemy(player));
-        System.out.println(listEnemy.size());
+        listEnemy.add(new NormalEnemy(player));
     }
 
     public static void update() {
+       counter++;
         if (!listEnemy.isEmpty()) {
-            for (Enemy enemy : listEnemy) enemy.update();
+            for (Enemy enemy : listEnemy) {
+                enemy.update();
+            }
             listEnemy.removeIf(Enemy::isDestroy);
         }
+        if(counter%100==0)
+          listEnemy.add(new NormalEnemy(player));
     }
 
     public static void render() {
         if (!listEnemy.isEmpty()) {
             for (Enemy enemy : listEnemy) {
                 enemy.render(graphicsContext);
+                System.out.println(listEnemy.size());
             }
         }
-
     }
 }

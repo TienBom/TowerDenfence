@@ -24,7 +24,7 @@ public class Enemy extends GameObject {
     public Direction direction = Direction.UP;
     public int wayPointIndex = 0;
 
-    public Enemy(double health, double armor, double speed, int reward, Image gunImg, Player player) {
+    public Enemy(double health, double armor, double speed, int reward, Player player) {
         this.health = health;
         this.armor = armor;
         this.speed = speed;
@@ -56,7 +56,8 @@ public class Enemy extends GameObject {
 
         /*gc.drawImage(base, x, y);
         gc.drawImage(gun, x, y);*/
-        gc.fillRect(x, y, 10, 20);
+        gc.setFill(Color.YELLOW);
+        gc.fillRect(x, y, 10, 10);
 
 
     }
@@ -110,7 +111,7 @@ public class Enemy extends GameObject {
     }
 
     enum Direction {
-        LEFT(10), UP(20), RIGHT(0), DOWN(10);
+        LEFT(1), UP(-1), RIGHT(2), DOWN(-2);
 
         public int degree;
 

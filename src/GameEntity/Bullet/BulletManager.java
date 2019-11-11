@@ -21,6 +21,7 @@ public class BulletManager {
         bulletList.remove(bullet);
     }
     public static void update(){
+        //System.out.println(bulletList.size());
         if(!bulletList.isEmpty()){
             for(Bullet bullet: bulletList) bullet.update();
             bulletList.removeIf(Bullet::isDestroy);
@@ -30,10 +31,9 @@ public class BulletManager {
         bulletList.clear();
     }
     public static void render(){
-        if(!bulletList.isEmpty())
+        System.out.println(bulletList.size());
             for(Bullet bullet:bulletList){
                 bullet.render(graphicsContext);
-                System.out.println("ok");
             }
 
     }
