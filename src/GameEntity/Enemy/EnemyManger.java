@@ -30,15 +30,14 @@ public class EnemyManger {
             }
             listEnemy.removeIf(Enemy::isDestroy);
         }
-        if(counter%100==0)
-          listEnemy.add(new NormalEnemy(player));
+        if(counter%50==0)
+        listEnemy.add(new NormalEnemy(player));
     }
 
     public static void render() {
         if (!listEnemy.isEmpty()) {
             for (Enemy enemy : listEnemy) {
                 enemy.render(graphicsContext);
-                System.out.println(listEnemy.size());
             }
         }
     }

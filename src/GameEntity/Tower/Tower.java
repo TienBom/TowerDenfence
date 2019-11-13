@@ -1,8 +1,6 @@
 package GameEntity.Tower;
 
-import GameEntity.Bullet.BulletManager;
-import GameEntity.Bullet.MachineGunBullet;
-import GameEntity.Bullet.NormalBullet;
+import GameEntity.Bullet.*;
 import GameEntity.Enemy.Enemy;
 import GameEntity.Enemy.EnemyManger;
 import GameEntity.GameObject;
@@ -19,9 +17,11 @@ public class Tower extends GameObject {
     private Player player;
     private boolean destroy = false;
 
-    public Tower(int range, int attackRate) {
-        this.range = range;
-        this.attackRate = attackRate;
+    public Tower() {
+    }
+
+    public Enemy getTarget() {
+        return target;
     }
 
     public int getRange() {
@@ -58,33 +58,40 @@ public class Tower extends GameObject {
 
     @Override
     public void render(GraphicsContext gc) {
-        gc.setFill(Color.BLACK);
+        gc.setFill(Color.PINK);
         gc.fillRect(x + 20, y + 20, 30, 30);
     }
 
     @Override
     public void update() {
-        //update lastAttacked
         if (target != null) lastAttacked++;
         else lastAttacked = 0;
-
-        //update target
         checkRange();
 
-        //fire a bullet
+
         if (lastAttacked > attackRate && target != null) {
             lastAttacked = 0;
-            if (this instanceof NormalTower) {
-                //BulletManager.addBullet("NormalBullet", target, this);
-                BulletManager.addBullet(new NormalBullet(target,this));
+            if(this instanceof NormalTower){
+                BulletManager.addBullet(new NormalBullet(this));
+                System.out.println("OK");
+            }
+            else if(this instanceof SmallerTower){
+                BulletManager.addBullet(new MachineGunBullet(this));
+                BulletManager.render();
+            }
+            else{
+                BulletManager.addBullet(new SniperBullet(this));
+                BulletManager.render();
+            }
+            /*if (this instanceof NormalTower) {
+                BulletManager.addBullet(new NormalBullet(this));
             }
             if (this instanceof SmallerTower) {
-                // BulletManager.addBullet("MachineGunBullet", target, this);
-                BulletManager.addBullet(new MachineGunBullet(target,this));
+                BulletManager.addBullet(new MachineGunBullet(this));
             }
             if (this instanceof SniperTower) {
-                BulletManager.addBullet(new NormalBullet(target,this));
-            }
+                BulletManager.addBullet(new SniperBullet(this));
+            }*/
         }
     }
 }

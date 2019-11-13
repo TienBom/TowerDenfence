@@ -6,6 +6,8 @@ public class Player {
     private int gold;
 
     public Player() {
+        health=1000;
+        gold=1000;
     }
 
     public void update() {
@@ -30,5 +32,13 @@ public class Player {
 
     public void setGold(int gold) {
         this.gold = gold;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
     }
 }

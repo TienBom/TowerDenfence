@@ -1,12 +1,14 @@
 package GameEntity.Tower;
 
 public class SniperTower extends Tower implements TowerProperty {
-    public SniperTower(int range, int attackRate) {
-        super(range, attackRate);
+    public SniperTower() {
+
     }
-    public SniperTower(){
-        super(SNIPER_TOWER_RANGE,SNIPER_TOWER_ATTACKRATE);
-        this.x = 2 * 80;
-        this.y = 6 * 80;
+    public SniperTower(int x,int y){
+        this.range=SNIPER_TOWER_RANGE;
+        this.attackRate=SNIPER_TOWER_ATTACKRATE;
+        this.x = x;
+        this.y = y;
+        this.lastAttacked=0;
     }
 }

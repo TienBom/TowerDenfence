@@ -31,7 +31,6 @@ public class BulletManager {
         bulletList.clear();
     }
     public static void render(){
-        System.out.println(bulletList.size());
             for(Bullet bullet:bulletList){
                 bullet.render(graphicsContext);
             }
