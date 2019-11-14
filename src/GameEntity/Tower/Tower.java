@@ -6,7 +6,10 @@ import GameEntity.Enemy.EnemyManger;
 import GameEntity.GameObject;
 import Main.Player;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
+import java.awt.*;
 
 public class Tower extends GameObject {
     protected int range;
@@ -16,6 +19,7 @@ public class Tower extends GameObject {
     protected int lastAttacked;//time kể từ lần bắn trc
     private Player player;
     private boolean destroy = false;
+    Image image;
 
     public Tower() {
     }
@@ -58,8 +62,7 @@ public class Tower extends GameObject {
 
     @Override
     public void render(GraphicsContext gc) {
-        gc.setFill(Color.PINK);
-        gc.fillRect(x + 20, y + 20, 30, 30);
+        gc.drawImage(image,x,y);
     }
 
     @Override
@@ -73,7 +76,6 @@ public class Tower extends GameObject {
             lastAttacked = 0;
             if(this instanceof NormalTower){
                 BulletManager.addBullet(new NormalBullet(this));
-                System.out.println("OK");
             }
             else if(this instanceof SmallerTower){
                 BulletManager.addBullet(new MachineGunBullet(this));

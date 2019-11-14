@@ -5,8 +5,8 @@ import javafx.scene.image.Image;
 
 public abstract class GameObject {
     public int i, j;
-    public int x;
-    public int y;
+    public double x;
+    public double y;
     public Image img;
 
     abstract public  void render(GraphicsContext gc);

@@ -1,5 +1,6 @@
 package GameEntity.Enemy;
 
+import Main.Config;
 import Main.Player;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -30,8 +31,14 @@ public class EnemyManger {
             }
             listEnemy.removeIf(Enemy::isDestroy);
         }
-        if(counter%50==0)
-        listEnemy.add(new NormalEnemy(player));
+        if(counter% Config.COUNTER_NORMAL_ENEMY ==0)
+            listEnemy.add(new NormalEnemy(player));
+        else if(counter%Config.COUNTER_TANKER_ENEMY==0)
+            listEnemy.add(new TankerEnemy(player));
+        else if(counter%Config.COUNTER_SMALLER_ENEMY==0)
+            listEnemy.add(new SmallerEnemy(player));
+        else if (counter%Config.COUNTER_BOSS_ENEMY==0)
+            listEnemy.add(new BossEnemy(player));
     }
 
     public static void render() {

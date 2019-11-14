@@ -14,7 +14,7 @@ public class TowerManager  {
         player = _player;
         towerList = new HashSet<Tower>();
         graphicsContext=_graphicsContext;
-        TowerManager.addTower(new NormalTower(4 * 80,1* 80));
+        //TowerManager.addTower(new NormalTower(4 * 80,1* 80));
         return true;
     }
 

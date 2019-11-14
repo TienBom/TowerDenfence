@@ -11,11 +11,12 @@ public class BossEnemy extends Enemy implements EnemyProperty {
     public BossEnemy(Player player){
         super(BOSS_ENEMY_HEALTH,BOSS_ENEMY_ARMOR,BOSS_ENEMY_SPEED, (int) BOSS_ENEMY_REWARD,player);
         this.direction=Direction.UP;
-        this.img= new Image("file:src/resources/AssetsKit_2/PNG/Retina/towerDefense_tile268.png");
+        //this.img= new Image("file:src/resources/AssetsKit_2/PNG/Retina/towerDefense_tile268.png");
         this.i=0;
         this.j=6;
         this.x=0 * 80 + 40;
         this.y=6 * 80 + 00;
+        this.image=BOSS_ENEMY_IMAGE;
 
     }
 }

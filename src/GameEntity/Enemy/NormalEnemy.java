@@ -16,5 +16,6 @@ public class NormalEnemy extends Enemy implements EnemyProperty {
         this.j=6;
         this.x=0 * 80 + 40;
         this.y=6 * 80 + 00;
+        this.image=NORMAL_ENEMY_IMAGE;
     }
 }

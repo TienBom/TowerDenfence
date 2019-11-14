@@ -11,11 +11,12 @@ public class SmallerEnemy extends Enemy implements EnemyProperty {
     public SmallerEnemy(Player player){
         super(SMALLER_ENEMY_HEALTH,SMALLER_ENEMY_ARMOR,SMALLER_ENEMY_SPEED, (int) SMALLER_ENEMY_REWARD,player);
         this.direction=Direction.UP;
-        this.img= new Image("file:src/resources/AssetsKit_2/PNG/Retina/towerDefense_tile268.png");
+       // this.img= new Image("file:src/resources/AssetsKit_2/PNG/Retina/towerDefense_tile268.png");
         this.i=0;
         this.j=6;
         this.x=0 * 80 + 40;
         this.y=6 * 80 + 00;
+        this.image=SMALLER_ENEMY_IMAGE;
 
     }
 }

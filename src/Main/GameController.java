@@ -21,30 +21,31 @@ public class GameController extends AnimationTimer {
     public Player player;
     public String towerType;
     public boolean chooseTower = false;
-    /*public void MouseHandling(MouseEvent mouseEvent) {
+
+    public void MouseHandling(MouseEvent mouseEvent) {
         double x = mouseEvent.getX();
         double y = mouseEvent.getY();
+        System.out.println("x=" + x);
+        System.out.println("y=" + y);
         if (chooseTower) {
             chooseTower = false;
-            int i = (int) Math.ceil(x * 1.0 / Config.GRID_WIDTH);
-            int j = (int) Math.ceil(y * 1.0 / Config.GRID_HEIGHT);
+            //int i = ((int) Math.ceil(x * 1.0 / Config.GRID_WIDTH))*Config.GRID_WIDTH;
+            //int j = ((int) Math.ceil(y * 1.0 / Config.GRID_HEIGHT))*Config.GRID_HEIGHT;
+            //System.out.println("i="+i);
+            //System.out.println("j="+j);
             if (towerType.equals("NormalTower"))
-                TowerManager.addTower(new NormalTower(i, j));
+                TowerManager.addTower(new NormalTower(x,y));
             else if (towerType.equals("SmallerTower"))
-                TowerManager.addTower(new SmallerTower(i, j));
-            else TowerManager.addTower(new SniperTower(i, j));
+                TowerManager.addTower(new SmallerTower(x,y));
+            else TowerManager.addTower(new SniperTower(x,y));
         }
     }
 
-    public void chooseNormalTower(ActionEvent event) {
-
+    public void chooseTower(ActionEvent event) {
+        String id = ((Control) event.getSource()).getId();
+        towerType = id;
+        chooseTower = !chooseTower;
     }
-    public void chooseSmallerTower(ActionEvent event){
-
-    }
-    public void chooseSniperTower(ActionEvent event){
-
-    }*/
 
     public GameController(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
@@ -57,6 +58,7 @@ public class GameController extends AnimationTimer {
 
     @Override
     public void handle(long now) {
+        //System.out.println(towerType);
         update();
         render();
         try {

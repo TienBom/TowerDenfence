@@ -15,7 +15,7 @@ public class Enemy extends GameObject {
     private double armor;
     private double speed;
     private int reward;
-    private Image gunImg;
+    Image image;
     private boolean destroy;
 
     // all Enemy use the same player and map
@@ -29,7 +29,6 @@ public class Enemy extends GameObject {
         this.armor = armor;
         this.speed = speed;
         this.reward = reward;
-        this.gunImg = gunImg;
         this.direction = Direction.UP;
         this.wayPointIndex = 0;
         this.player = player;
@@ -56,10 +55,7 @@ public class Enemy extends GameObject {
 
         /*gc.drawImage(base, x, y);
         gc.drawImage(gun, x, y);*/
-        gc.setFill(Color.YELLOW);
-        gc.fillRect(x, y, 10, 10);
-
-
+        gc.drawImage(image,x,y);
     }
 
     void calculateDirection() {
