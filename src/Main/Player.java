@@ -1,12 +1,12 @@
 package Main;
 
 public class Player {
-    private double health;
+    private int health;
     private Boolean lose;
     private int gold;
 
     public Player() {
-        health=1000;
+        health=500;
         gold=1000;
     }
 
@@ -34,11 +34,11 @@ public class Player {
         this.gold = gold;
     }
 
-    public double getHealth() {
+    public int getHealth() {
         return health;
     }
 
-    public void setHealth(double health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 }

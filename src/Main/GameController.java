@@ -11,33 +11,59 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Control;
 import javafx.scene.input.MouseEvent;
 
 import java.awt.*;
+import java.util.Optional;
 
 public class GameController extends AnimationTimer {
     public GraphicsContext graphicsContext;
     public Player player;
     public String towerType;
     public boolean chooseTower = false;
+    public static boolean STOP = false;
 
     public void MouseHandling(MouseEvent mouseEvent) {
         double x = mouseEvent.getX();
         double y = mouseEvent.getY();
-        System.out.println("x=" + x);
-        System.out.println("y=" + y);
+
         if (chooseTower) {
             chooseTower = false;
-            //int i = ((int) Math.ceil(x * 1.0 / Config.GRID_WIDTH))*Config.GRID_WIDTH;
-            //int j = ((int) Math.ceil(y * 1.0 / Config.GRID_HEIGHT))*Config.GRID_HEIGHT;
-            //System.out.println("i="+i);
-            //System.out.println("j="+j);
-            if (towerType.equals("NormalTower"))
-                TowerManager.addTower(new NormalTower(x,y));
-            else if (towerType.equals("SmallerTower"))
-                TowerManager.addTower(new SmallerTower(x,y));
-            else TowerManager.addTower(new SniperTower(x,y));
+            if (towerType.equals("NormalTower")) {
+                if (player.getGold() >= Config.NORMAL_TOWER_COST) {
+                    TowerManager.addTower(new NormalTower(x, y));
+                    player.setGold(player.getGold() - Config.NORMAL_TOWER_COST);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Thông báo");
+                    alert.setHeaderText("Bạn không đủ tiền");
+                    alert.show();
+                }
+            } else if (towerType.equals("SmallerTower")) {
+                if (player.getGold() >= Config.SMALLER_TOWER_COST) {
+                    TowerManager.addTower(new SmallerTower(x, y));
+                    player.setGold(player.getGold() - Config.SMALLER_TOWER_COST);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Thông báo");
+                    alert.setHeaderText("Bạn không đủ tiền");
+                    alert.show();
+                }
+            } else {
+                if (player.getGold() >= Config.SNIPER_TOWER_COST) {
+                    TowerManager.addTower(new SniperTower(x, y));
+                    player.setGold(player.getGold() - Config.SNIPER_TOWER_COST);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Thông báo");
+                    alert.setHeaderText("Bạn không đủ tiền");
+                    alert.show();
+                }
+            }
         }
     }
 
@@ -50,6 +76,7 @@ public class GameController extends AnimationTimer {
     public GameController(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
         player = new Player();
+        player.setHealth(10);
         player.setGold(500);
         EnemyManger.init(player, graphicsContext);
         TowerManager.init(player, graphicsContext);
@@ -58,14 +85,38 @@ public class GameController extends AnimationTimer {
 
     @Override
     public void handle(long now) {
-        //System.out.println(towerType);
-        update();
-        render();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if (player.getHealth() <= 0) {
+            EnemyManger.counter = 0;
+            this.restart();
+            player.setHealth(10);
+            player.setGold(500);
+            Main.window.setScene(Main.sceneExit);
+            Main.window.show();
+            //this.stop();
+            return;
+        } else if (EnemyManger.winGame()) {
+            this.restart();
+            EnemyManger.counter = 0;
+            player.setHealth(10);
+            player.setGold(500);
+            Main.window.setScene(Main.sceneWin);
+            Main.window.show();
+            //this.stop();
+            return;
+        } else {
+            update();
+            render();
+            String health = "" + player.getHealth();
+            String coin = "" + player.getGold();
+            Main.label_health.setText(health);
+            Main.label_coin.setText(coin);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     public void start() {
@@ -79,14 +130,26 @@ public class GameController extends AnimationTimer {
         TowerManager.render();
         EnemyManger.render();
         BulletManager.render();
-        //TowerManager.render();
-        // BulletManager.render();
     }
 
     public void update() {
         EnemyManger.update();
         TowerManager.update();
         BulletManager.update();
+    }
+
+    public void restart() {
+        EnemyManger.listEnemy.clear();
+        TowerManager.towerList.clear();
+        BulletManager.bulletList.clear();
+        player.setHealth(10);
+        player.setGold(500);
+    }
+
+    public void restartGame() {
+        restart();
+        Main.window.setScene(Main.sceneStart);
+        Main.window.show();
     }
 
 }

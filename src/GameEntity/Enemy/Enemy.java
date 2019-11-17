@@ -15,7 +15,7 @@ public class Enemy extends GameObject {
     private double armor;
     private double speed;
     private int reward;
-    Image image;
+    public Image image;
     private boolean destroy;
 
     // all Enemy use the same player and map
@@ -42,19 +42,6 @@ public class Enemy extends GameObject {
     }
 
     public void render(GraphicsContext gc) {
-        /*SnapshotParameters params = new SnapshotParameters();
-        params.setFill(Color.TRANSPARENT);
-
-        ImageView iv = new ImageView(img);
-        iv.setRotate(this.direction.getDegree());
-        Image base = iv.snapshot(params, null);
-
-        ImageView iv2 = new ImageView(gunImg);
-        iv2.setRotate(this.direction.getDegree());
-        Image gun = iv2.snapshot(params, null);
-
-        /*gc.drawImage(base, x, y);
-        gc.drawImage(gun, x, y);*/
         gc.drawImage(image,x,y);
     }
 

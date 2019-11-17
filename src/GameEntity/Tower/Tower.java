@@ -79,21 +79,11 @@ public class Tower extends GameObject {
             }
             else if(this instanceof SmallerTower){
                 BulletManager.addBullet(new MachineGunBullet(this));
-                BulletManager.render();
             }
             else{
                 BulletManager.addBullet(new SniperBullet(this));
-                BulletManager.render();
             }
-            /*if (this instanceof NormalTower) {
-                BulletManager.addBullet(new NormalBullet(this));
-            }
-            if (this instanceof SmallerTower) {
-                BulletManager.addBullet(new MachineGunBullet(this));
-            }
-            if (this instanceof SniperTower) {
-                BulletManager.addBullet(new SniperBullet(this));
-            }*/
+
         }
     }
 }

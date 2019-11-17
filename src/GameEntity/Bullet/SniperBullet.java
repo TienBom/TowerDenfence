@@ -11,6 +11,8 @@ public class SniperBullet extends Bullet implements BulletProperty {
         this.range=SNIPER_BULLET_RANGE;
         this.damage=SNIPER_BULLET_DAMAGE;
         this.speed=SNIPER_BULLET_SPEED;
-        calculateVector(target);
+        this.width=SNIPER_BULLET_WIDTH;
+        this.height=SNIPER_BULLET_HEIGHT;
+        this.color=SNIPER_BULLET_COLOR;
     }
 }

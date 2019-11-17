@@ -1,73 +1,73 @@
 package GameEntity.Bullet;
 
 import GameEntity.Enemy.Enemy;
+import GameEntity.Enemy.NormalEnemy;
+import GameEntity.Enemy.SmallerEnemy;
+import GameEntity.Enemy.TankerEnemy;
 import GameEntity.GameObject;
 import GameEntity.Tower.Tower;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Bullet extends GameObject {
+
     protected double speed;
     protected double damage;
     protected double range;
     protected Enemy target;
     protected Tower tower;
-    protected double dx;
-    protected double dy;
-    private boolean destroy=false;
+    private double xLoc;
+    private double yLoc;
+    private boolean destroy = false;
+    protected double width;
+    protected double height;
+    protected Color color;
 
-    public Bullet(Tower tower){
+    public Bullet(Tower tower) {
         this.tower=tower;
-        this.target=tower.getTarget();
-    }
-    public void doDestroy() {
-        destroy = true;
+        target = tower.getTarget();
+        xLoc = tower.x + 12 * Math.cos(angleOfProjectileInRadians());
+        yLoc = tower.y + 12 * Math.sin(angleOfProjectileInRadians());
     }
 
-    /**
-     Hàm tính toán làm cho đạn bay thẳng
-     tham khảo https://github.com/tdnguyenND/Tower-Defence.git
-     */
-    public void calculateVector(Enemy target) {
-        double radian = Math.atan2(target.x - tower.x,
-                target.y - tower.y);
-        this.dx = Math.sin(radian) * speed;
-        this.dy = Math.cos(radian) * speed;
-    }
-    public void doDamage(){
-        target.beAttacked(damage);
-    }
-    public boolean isDestroy() {
-        return destroy;
-    }
-    public void move(){
-       x+=dx;
-       y+=dy;
+    public double angleOfProjectileInRadians() {
+        return Math.atan2(target.y - tower.y, target.x - tower.x);
     }
 
     @Override
     public void render(GraphicsContext gc) {
-            gc.setFill(Color.PINK);
-            gc.fillRect(x,y,10,10);
+        gc.setFill(color);
+        gc.fillOval(xLoc, yLoc, width, height);
+    }
+
+    public void doDamage() {
+        target.beAttacked(damage);
+    }
+
+    public void doDestroy() {
+        destroy = true;
+    }
+
+    public boolean isDestroy() {
+        return destroy;
+    }
+    public void move(){
+        xLoc += speed*Math.cos(angleOfProjectileInRadians());
+
+        yLoc += speed*Math.sin(angleOfProjectileInRadians());
     }
     public boolean isHit(){
-        return (Math.sqrt(Math.pow(this.x-target.y,2)+Math.pow(this.y-target.y,2)) <= target.x*10);
+        return (Math.abs(xLoc - target.x)< speed/2 || Math.abs(yLoc - target.y)< speed/2);
     }
     @Override
     public void update() {
-
-            /**
-             * TODO: - move
-             *       - check isHit -> do dmg, doDes
-             *       - check out of range -> do destroy
-             */
-            move();
-            if(isHit()){
-                doDamage();
-                doDestroy();
-            }
-            else if( Math.sqrt(Math.pow(this.x-tower.y,2)+Math.pow(this.y-tower.y,2))> tower.getRange())
-                doDestroy();
-        }
-
+        move();
+        if (isHit()) {
+            doDamage();
+            doDestroy();
+        } else if (Math.sqrt(Math.pow(this.x - tower.x, 2) + Math.pow(this.y - tower.y, 2)) > tower.getRange())
+            doDestroy();
+    }
 }
+
+

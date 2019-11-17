@@ -13,7 +13,9 @@ public class NormalBullet extends Bullet implements BulletProperty {
         this.range=NORMAL_BULLET_RANGE;
         this.damage=NORMAL_BULLET_DAMAGE;
         this.speed=NORMAL_BULLET_SPEED;
-        calculateVector(target);
+        this.width=NORMAL_BULLET_WIDTH;
+        this.height=NORMAL_BULLET_HEIGHT;
+        this.color=NORMAL_BULLET_COLOR;
     }
 
 }

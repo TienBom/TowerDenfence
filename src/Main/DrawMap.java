@@ -25,18 +25,16 @@ public class DrawMap {
     public static void draw(GraphicsContext graphicsContext) {
         for (int i = 0; i < MAP_SPRITES.length; i++) {
             for (int j = 0; j < MAP_SPRITES[i].length; j++) {
-                //graphicsContext.drawImage(new Image("file:src/resources/AssetsKit_2/PNG/Retina/towerDefense_tile" + MAP_SPRITES[i][j] + ".png"), j * 80, i * 80);
-                if(MAP_SPRITES[i][j].equals("0")){
-                    //graphicsContext.setFill(Color.GREEN);
-                    graphicsContext.drawImage(new Image("file:src/resources/AssetsKit_2/PNG/mountain.png"),j*80,i*80);
-                }else{
-                    //graphicsContext.setFill(Color.GRAY);
-                    graphicsContext.drawImage(new Image("file:src/resources/AssetsKit_2/PNG/moutain.png"),j*80,i*80);
+                if (MAP_SPRITES[i][j].equals("0")) {
+
+                    graphicsContext.drawImage(new Image("file:src/resources/AssetsKit_2/PNG/mountain.png"), j * 80, i * 80);
+                } else {
+                    graphicsContext.drawImage(new Image("file:src/resources/AssetsKit_2/PNG/moutain.png"), j * 80, i * 80);
                 }
-                //graphicsContext.fillRect(j*Config.GRID_WIDTH,i*Config.GRID_HEIGHT,Config.GRID_WIDTH,Config.GRID_HEIGHT);
-            }
+
             }
         }
     }
+}
 
 
